@@ -30,7 +30,7 @@ function RouteInterceptor({ children, isAuthenticated, ...rest }) {
 }
 
 export const Views = (props) => {
-  const { locale, token, location, direction } = props;
+  const { locale, location, direction } = props;
   const currentAppLocale = AppLocale[locale];
   useBodyClass(`dir-${direction}`);
   return (

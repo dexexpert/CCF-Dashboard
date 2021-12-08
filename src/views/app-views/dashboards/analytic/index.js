@@ -26,6 +26,11 @@ import utils from 'utils';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import ccfTokenAbi from './abi/ccf-abi';
+const Web3 = require('web3');
+const tokenAddress = "0x7f9528b913A99989B88104b633D531241591A358";
+const deadAddress = "0x000000000000000000000000000000000000dead";
+
 
 const MembersChart = props => (
   <ApexChart {...props} />
@@ -126,120 +131,135 @@ const tableColumns = [
 export const DefaultDashboard = () => {
   const [visitorChartData] = useState(VisitorChartData);
   const [annualStatisticData] = useState(AnnualStatisticData);
-  let [recentTransactionData, setrecentTransactionData] = useState([
-    {
-      id: '#5331',
-      name: 'Pancakeswap Price',
-      date: '',
-      avatarColor: '#04d182'
-    },
-    {
-      id: '#5332',
-      name: '24H Volume',
-      date: '',
-      avatarColor: '#fa8c16'
-    },
-    {
-      id: '#5333',
-      name: 'Liquidity',
-      date: '',
-      avatarColor: '#1890ff'
-    },
-    {
-      id: '#5334',
-      name: 'holders',
-      date: '',
-      avatarColor: '#ffc542'
-    },
-    {
-      id: '#5335',
-      name: 'Market Cap(Fully Dilluted)',
-      date: '',
-      avatarColor: '#ff6b72'
-    },
-    {
-      id: '#5336',
-      name: 'All-Time High',
-      date: '',
-      avatarColor: '#ff6b72'
-    }]);
+  let [manualburntToken, setburntToken] = useState();
+  let [recentTransactionData, setrecentTransactionData] = useState();
   const { direction } = useSelector(state => state.theme)
 
   const params = {
     "ids": "cross-chain-farming",
     "vs_currency": "usd"
   };
-  const [token, setToken] = useState({ uniswap_price: '', volumePerDay: '', liquidity: '', holders: '', market_cap: '', ath: '' })
-  const MINUTE_MS = 300000;
-  let uniswap_price;
+  const [token, setToken] = useState({ max_supply: '', circulatingSupply: '', burntToken: '', pancakeswap_price: '', volumePerDay: '', liquidity: '', holders: '', marketcapFull: '', ath: '' })
+  const MINUTE_MS = 600000;
+  let circulatingSupply;
+  let burntToken;
+  let pancakeswap_price;
   let volumePerDay;
   let liquidity;
   let holders;
-  let market_cap;
+  let marketcapFull;
   let ath;
   let total_supply;
-  useEffect(() => {
-    async function getData() {
-      await axios.get("https://api.coingecko.com/api/v3/coins/markets", { params },
-        { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } })
-        .then(res => {
-          uniswap_price = res.data[0].current_price;
-          volumePerDay = res.data[0].total_volume;
-          liquidity = 534221;
-          holders = 0;
-          total_supply = res.data[0].total_supply;
-          market_cap = uniswap_price * total_supply;
-          ath = res.data[0].ath;
+  let max_supply = 2000000000000;
 
-          setToken({ uniswap_price: uniswap_price, volumePerDay: volumePerDay, liquidity: liquidity, holders: '', market_cap: market_cap, ath: ath });
-          setrecentTransactionData([
-            {
-              id: '#5331',
-              name: 'Pancakeswap Price',
-              date: '$ ' + uniswap_price,
-              avatarColor: '#04d182'
-            },
-            {
-              id: '#5332',
-              name: '24H Volume',
-              date: '$ ' + Number(volumePerDay).toLocaleString(),
-              avatarColor: '#fa8c16'
-            },
-            {
-              id: '#5333',
-              name: 'Liquidity',
-              date: '$ ' + Number(liquidity).toLocaleString(),
-              avatarColor: '#1890ff'
-            },
-            {
-              id: '#5334',
-              name: 'holders',
-              date: holders,
-              avatarColor: '#ffc542'
-            },
-            {
-              id: '#5335',
-              name: 'Market Cap(Fully Dilluted)',
-              date: '$ ' + Number(market_cap).toLocaleString(),
-              avatarColor: '#ff6b72'
-            },
-            {
-              id: '#5336',
-              name: 'All-Time High',
-              date: '$ ' + ath,
-              avatarColor: '#ff6b72'
-            }]);
-          console.log(recentTransactionData);
-        })
-        .catch(err => {
-          console.log(err + "first--------------------------");
-        });
-    }
+  async function getData() {
+    await axios.get("https://api.coingecko.com/api/v3/coins/markets", { params },
+      { headers: { "Access-Control-Allow-Origin": 'http://localhost:3000' } })
+      .then(res => {
+
+        pancakeswap_price = res.data[0].current_price;
+        volumePerDay = res.data[0].total_volume;
+        liquidity = 152614;
+        holders = 3712;
+        total_supply = res.data[0].total_supply;
+        marketcapFull = pancakeswap_price * total_supply;
+        ath = res.data[0].ath;
+
+        burntToken = max_supply - total_supply + manualburntToken / 10 ** 9;
+        circulatingSupply = total_supply - burntToken
+
+        setToken({ max_supply: max_supply, circulatingSupply: circulatingSupply, burntToken: burntToken, pancakeswap_price: pancakeswap_price, volumePerDay: volumePerDay, liquidity: liquidity, holders: holders, marketcapFull: marketcapFull, ath: ath });
+        setrecentTransactionData([
+          {
+            id: '#5327',
+            name: 'Total supply',
+            date: Number(max_supply).toLocaleString(),
+            avatarColor: '#fa8c16'
+          },
+          {
+            id: '#5328',
+            name: 'Circulating supply',
+            date: Number(circulatingSupply).toLocaleString(),
+            avatarColor: '#04d182'
+          },
+          {
+            id: '#5329',
+            name: 'Burnt token',
+            date: Number(burntToken).toLocaleString(),
+            avatarColor: '#ffc542'
+          }, {
+            id: '#5330',
+            name: 'Burning rate',
+            date: 2 + ' %',
+            avatarColor: '#04d182'
+          },
+          {
+            id: '#5331',
+            name: 'Pancakeswap Price',
+            date: '$ ' + pancakeswap_price,
+            avatarColor: '#04d182'
+          },
+          {
+            id: '#5332',
+            name: '24H Volume',
+            date: '$ ' + Number(volumePerDay).toLocaleString(),
+            avatarColor: '#fa8c16'
+          },
+          {
+            id: '#5333',
+            name: 'Liquidity',
+            date: '$ ' + Number(liquidity).toLocaleString(),
+            avatarColor: '#1890ff'
+          },
+          {
+            id: '#5334',
+            name: 'holders',
+            date: Number(holders).toLocaleString(),
+            avatarColor: '#ffc542'
+          },
+          {
+            id: '#5335',
+            name: 'Market Cap(Fully Dilluted)',
+            date: '$ ' + Number(marketcapFull).toLocaleString(),
+            avatarColor: '#ff6b72'
+          },
+          {
+            id: '#5336',
+            name: 'All-Time High',
+            date: '$ ' + ath,
+            avatarColor: '#ff6b72'
+          }]);
+        console.log(recentTransactionData);
+      })
+      .catch(err => {
+        console.log(err + "first--------------------------");
+      });
+  };
+
+  const getBalance = async () => {
+    const provider = new Web3(window.web3.currentProvider);
+    var ccfContract = new provider.eth.Contract(ccfTokenAbi, tokenAddress);
+    console.log(ccfContract);
+    ccfContract.methods.balanceOf(deadAddress).call().then(res => {
+      setburntToken(res);
+    }).catch(err => {
+
+      console.log(err);
+    });
+
+  };
+
+
+
+  useEffect(() => {
+    getBalance();
     getData();
     setInterval(() => {
+      getBalance();
       getData();
     }, MINUTE_MS);
-  }, []);
+
+  }, [manualburntToken]);
 
   return (
     <>
@@ -251,7 +271,9 @@ export const DefaultDashboard = () => {
                 <Col xs={16} sm={16} md={16} lg={16} xl={8} key={i}>
                   <StatisticWidget
                     title={elm.title}
-                    value={(i == 2) ? "$ " + token.volumePerDay.toLocaleString() : elm.value}
+                    value={(i == 0 && token.circulatingSupply != undefined) ? "$ " + (token.circulatingSupply * token.pancakeswap_price).toLocaleString() :
+                      (i == 2 && token.volumePerDay != undefined) ? "$ " + token.volumePerDay.toLocaleString() :
+                        "$ " + token.liquidity.toLocaleString()}
                     status={elm.status}
                     subtitle={elm.subtitle}
                   />
@@ -263,7 +285,7 @@ export const DefaultDashboard = () => {
             <Col span={24}>
               <ChartWidget
                 title="$CCF Metrics"
-                extra={'$ ' + token.uniswap_price}
+                extra={'$ ' + token.pancakeswap_price}
                 series={visitorChartData.series}
                 xAxis={visitorChartData.categories}
                 height={'400px'}

@@ -1,52 +1,52 @@
 import React, { Component } from 'react'
-import GoogleMap  from 'google-map-react';
+import GoogleMap from 'google-map-react';
 
-const Marker = ({text}) => (
+const Marker = ({ text }) => (
 	<img className="cursor-pointer" src="/img/others/marker.png" alt="" />
 );
 
 export class Event extends Component {
 
-	state= {
+	state = {
 		center: [59.838043, 30.337157],
-    zoom: 9,
-    greatPlaces: [
-      {id: 'A', lat: 59.955413, lng: 30.337844},
-      {id: 'B', lat: 59.724, lng: 30.080}
-    ]
+		zoom: 9,
+		greatPlaces: [
+			{ id: 'A', lat: 59.955413, lng: 30.337844 },
+			{ id: 'B', lat: 59.724, lng: 30.080 }
+		]
 	}
 
 	onChange = (props) => {
 		console.log('onChange works!', props)
-  }
+	}
 
-  onClick = (value) => {
+	onClick = (value) => {
 		console.log('onClick works!', value)
-		const {lat, lng} = value;
+		const { lat, lng } = value;
 		this.setState({
 			center: [lat, lng]
 		})
-  }
+	}
 
-  onChildMouseEnter = (key , childProps ) => {
+	onChildMouseEnter = (key, childProps) => {
 		console.log('onChildMouseEnter works!', key, childProps)
-  }
+	}
 
-  onChildMouseLeave = (key , childProps ) => {
+	onChildMouseLeave = (key, childProps) => {
 		console.log('onChildMouseLeave works!', key, childProps)
-  }
+	}
 
 	render() {
 		const places = this.state.greatPlaces
-      .map(place => {
-        const {id, ...coords} = place;
-        return (
-          <Marker
-            key={id}
-            {...coords}
-            text={id} />
-        );
-      });
+			.map(place => {
+				const { id, ...coords } = place;
+				return (
+					<Marker
+						key={id}
+						{...coords}
+						text={id} />
+				);
+			});
 
 		return (
 			<div style={{ height: '500px', width: '100%' }}>
@@ -61,7 +61,7 @@ export class Event extends Component {
 					onChildMouseLeave={this.onChildMouseLeave}
 				>
 					{places}
-      	</GoogleMap>
+				</GoogleMap>
 			</div>
 		)
 	}

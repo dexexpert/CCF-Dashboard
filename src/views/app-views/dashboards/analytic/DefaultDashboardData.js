@@ -27,23 +27,20 @@ export const VisitorChartData = {
 
 export const AnnualStatisticData = [
 	{
-		title: 'NAV',
+		title: 'Market Cap',
 		value: '$ 0',
 		status: 0,
-		subtitle: `Compare to last year (2020)`
-	},
+			},
 	{
 		title: 'CCF/BNB Liquidity',
 		value: '$ 0',
 		status: 0,
-		subtitle: `Compare to last year (2020)`
-	},
+			},
 	{
 		title: '24H Volume',
 		value: '$ 0',
 		status: 0,
-		subtitle: `Compare to last year (2020)`
-	}
+			}
 ]
 
 export const ActiveMembersData = [{

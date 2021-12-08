@@ -79,7 +79,7 @@ const SideNavContent = (props) => {
                   <Menu.Item key={subMenuFirst.key}>
                     {subMenuFirst.icon ? <Icon type={subMenuFirst.icon} /> :
                       (
-                        <span role="img" aria-label="telegram" class="anticon anticon-telegram">
+                        <span role="img" aria-label="telegram" className="anticon anticon-telegram">
                           <img style={{ marginTop: "-5px" }} width="17px" height="17px"
                             src={subMenuFirst.iconURL} alt='ico' />
                         </span>

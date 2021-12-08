@@ -6,152 +6,152 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Loading from 'components/shared-components/Loading';
 
 const menuList = [
-	{ 
-		name:'Introduction', 
+	{
+		name: 'Introduction',
 		key: 'introduction',
 		sub: []
 	},
-	{ 
-		name: 'Product Content', 
+	{
+		name: 'Product Content',
 		key: 'product-content',
 		sub: []
 	},
-	{ 
-		name: 'Folder Structure', 
+	{
+		name: 'Folder Structure',
 		key: 'folder-structure',
 		sub: []
 	},
-	{ 
-		name: 'Layout Overview', 
+	{
+		name: 'Layout Overview',
 		key: 'layout-overview',
 		sub: []
 	},
-	{ 
-		name: 'Installation', 
+	{
+		name: 'Installation',
 		key: 'installation',
 		sub: []
 	},
-	{ 
-		name: 'Development', 
+	{
+		name: 'Development',
 		key: 'development',
 		sub: []
 	},
-	{ 
-		name: 'Updating', 
+	{
+		name: 'Updating',
 		key: 'updating',
 		sub: []
 	},
-	{ 
-		name: 'TemplateSetting', 
+	{
+		name: 'TemplateSetting',
 		key: 'template-setting',
 		sub: []
 	},
-	{ 
-		name: 'Routing', 
+	{
+		name: 'Routing',
 		key: 'routing',
-		sub: [] 
+		sub: []
 	},
-	{ 
-		name: 'Authentication', 
+	{
+		name: 'Authentication',
 		key: 'authentication',
 		sub: [
 			{
-				name: 'JWT', 
+				name: 'JWT',
 				key: 'jwt',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'Firebase', 
+				name: 'Firebase',
 				key: 'firebase',
-				sub: [] 
+				sub: []
 			}
-		] 
+		]
 	},
-	{ 
-		name: 'Localization', 
+	{
+		name: 'Localization',
 		key: 'localization',
-		sub: [] 
+		sub: []
 	},
-	{ 
-		name: 'Components', 
+	{
+		name: 'Components',
 		key: 'components',
 		sub: [
 			{
-				name: 'AvatarStatusDemo', 
+				name: 'AvatarStatusDemo',
 				key: 'avatar-status-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'ChartWidgetDemo', 
+				name: 'ChartWidgetDemo',
 				key: 'chart-widget-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'CustomStatisticDemo', 
+				name: 'CustomStatisticDemo',
 				key: 'custom-statistic-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'ColorPickerDemo', 
+				name: 'ColorPickerDemo',
 				key: 'color-picker-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'DataDisplayWidgetDemo', 
+				name: 'DataDisplayWidgetDemo',
 				key: 'data-display-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'DonutChartWidgetDemo', 
+				name: 'DonutChartWidgetDemo',
 				key: 'donut-chart-Widget-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'EllipsisDropdownDemo', 
+				name: 'EllipsisDropdownDemo',
 				key: 'ellipsis-dropdown-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'FlexDemo', 
+				name: 'FlexDemo',
 				key: 'flex-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'GoalWidgetDemo', 
+				name: 'GoalWidgetDemo',
 				key: 'goal-widget-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'LoadingDemo', 
+				name: 'LoadingDemo',
 				key: 'loading-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'RegiondataWidgetDemo', 
+				name: 'RegiondataWidgetDemo',
 				key: 'regiondata-widget-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'StatisticWidgetDemo', 
+				name: 'StatisticWidgetDemo',
 				key: 'statistic-widget-demo',
-				sub: [] 
+				sub: []
 			},
 			{
-				name: 'CustomIconDemo', 
+				name: 'CustomIconDemo',
 				key: 'custom-icon-demo',
-				sub: [] 
+				sub: []
 			}
-		] 
+		]
 	},
-	{ 
-		name: 'UtilityClasses', 
+	{
+		name: 'UtilityClasses',
 		key: 'utility-classes',
-		sub: [] 
+		sub: []
 	},
-	{ 
-		name: 'Changelog', 
+	{
+		name: 'Changelog',
 		key: 'changelog',
-		sub: [] 
+		sub: []
 	}
 ]
 
@@ -171,16 +171,16 @@ const DocsMenu = (props) => {
 						return (
 							<Menu.Item key={`${match.url}/${prefix}${elm.key}`}>
 								<span>{elm.name}</span>
-								<Link to={`${match.url}/${prefix}${elm.key}`}/>
+								<Link to={`${match.url}/${prefix}${elm.key}`} />
 							</Menu.Item>
 						)
 					} else {
-					 	return (
+						return (
 							<Menu.SubMenu key={`${match.url}/${prefix}${elm.key}`} title={elm.name}>
-								{elm.sub.map(item =>(
+								{elm.sub.map(item => (
 									<Menu.Item key={`${match.url}/${prefix}${item.key}`}>
 										<span>{item.name}</span>
-										<Link to={`${match.url}/${prefix}${item.key}`}/>
+										<Link to={`${match.url}/${prefix}${item.key}`} />
 									</Menu.Item>
 								))}
 							</Menu.SubMenu>
@@ -195,8 +195,8 @@ const DocsMenu = (props) => {
 const Docs = props => {
 	const { match } = props
 	return (
-		<InnerAppLayout 
-			sideContent={<DocsMenu {...props}/>}
+		<InnerAppLayout
+			sideContent={<DocsMenu {...props} />}
 			mainContent={
 				<div className="p-4">
 					<div className="container-fluid">
@@ -204,20 +204,21 @@ const Docs = props => {
 							<Switch>
 								{menuList.map(elm => (
 									elm.sub.length === 0 ?
-									<Route 
-										key={elm.key}
-										path={`${match.url}/${prefix}${elm.key}`} 
-										component={lazy(() => import(`./components/${elm.name.replace(/\s/g, '')}`))}
-									/>
-									:
-									elm.sub.map(item => (
-										<Route 
-											key={item.key}
-											path={`${match.url}/${prefix}${item.key}`} 
-											component={lazy(() => import(`./components/${item.name.replace(/\s/g, '')}`))}
+										<Route
+											key={elm.key}
+											path={`${match.url}/${prefix}${elm.key}`}
+											component={lazy(() => import(`./components/${elm.name.replace(/\s/g, '')}`))}
 										/>
-									))
+										:
+										elm.sub.map(item => (
+											<Route
+												key={item.key}
+												path={`${match.url}/${prefix}${item.key}`}
+												component={lazy(() => import(`./components/${item.name.replace(/\s/g, '')}`))}
+											/>
+										))
 								))}
+								<Redirect from={`${match.url}`} to={`${match.url}/${prefix}firstpage`} />
 								<Redirect from={`${match.url}`} to={`${match.url}/${prefix}introduction`} />
 							</Switch>
 						</Suspense>
@@ -230,5 +231,8 @@ const Docs = props => {
 		/>
 	)
 }
+export default Docs;
 
-export default Docs
+/* 
+                             
+ */

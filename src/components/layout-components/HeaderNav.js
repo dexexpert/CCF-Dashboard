@@ -3,9 +3,6 @@ import { connect } from "react-redux";
 import { Layout } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined, SearchOutlined } from '@ant-design/icons';
 import Logo from './Logo';
-import NavNotification from './NavNotification';
-import NavProfile from './NavProfile';
-import NavLanguage from './NavLanguage';
 import NavPanel from './NavPanel';
 import NavSearch from './NavSearch';
 import SearchInput from './NavSearch/SearchInput.js'

@@ -13,7 +13,8 @@ import {
   LinkOutlined,
   MediumOutlined,
   FundViewOutlined,
-  GithubOutlined
+  GithubOutlined,
+  FileTextOutlined
 } from '@ant-design/icons';
 import { APP_PREFIX_PATH } from 'configs/AppConfig'
 
@@ -70,6 +71,14 @@ const dashBoardNavTree = [{
       title: 'sidenav.dashboard.votes',
       icon: LikeOutlined,
       breadcrumb: true,
+      submenu: []
+    },
+    {
+      key: 'dashboard-docs',
+      path: `${APP_PREFIX_PATH}/dashboards/docs`,
+      title: 'sidenav.dashboard.docs',
+      icon: FileTextOutlined,
+      breadcrumb: false,
       submenu: []
     }
   ]
