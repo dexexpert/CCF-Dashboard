@@ -5,10 +5,12 @@ import {
   Button,
   Modal
 } from 'antd';
+
 import StatisticWidget from 'components/shared-components/StatisticWidget';
 import { withRouter } from 'react-router-dom';
 import ccfTokenAbi from './abi/ccf-abi';
 import axios from 'axios';
+
 const Web3 = require('web3');
 const tokenAddress = "0x7f9528b913A99989B88104b633D531241591A358";
 
