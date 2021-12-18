@@ -1,0 +1,2 @@
+(this.webpackJsonpemilus=this.webpackJsonpemilus||[]).push([[13],{734:function(s,e,t){"use strict";t.r(e);t(0);var i=t(3);e.default=function(){return Object(i.jsxs)("div",{children:[Object(i.jsx)("h2",{children:"Roadmap"}),Object(i.jsx)("p",{className:"font-size-md",children:Object(i.jsx)("img",{style:{width:"100%",height:"100%"},alt:"Roadmap",src:"/img/roadmap.png"})})]})}}}]);
+//# sourceMappingURL=13.db1355f6.chunk.js.map

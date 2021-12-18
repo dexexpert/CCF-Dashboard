@@ -1,0 +1,2 @@
+(this.webpackJsonpemilus=this.webpackJsonpemilus||[]).push([[10],{731:function(s,e,t){"use strict";t.r(e);t(0);var i=t(3);e.default=function(){return Object(i.jsx)("div",{children:Object(i.jsx)("p",{className:"font-size-md",children:Object(i.jsx)("img",{style:{width:"100%"},src:"/img/firstpage.png",alt:"first page"})})})}}}]);
+//# sourceMappingURL=10.3940740c.chunk.js.map
