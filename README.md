@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Check the deployed link
+
+This project can be found in [CCF Dashboard](https://dashboard.ccfdao.com/)
+
 ## Available Scripts
 
 In the project directory, you can run:
